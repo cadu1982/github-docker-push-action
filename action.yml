@@ -1,0 +1,43 @@
+name: Push Application Image
+
+description: Push the Image to GitHub Container Registry
+
+inputs:
+  registry:
+    required: true
+    description: Registry reference
+  github-repo-owner:
+    required: true
+    description: Repository owner
+  github-repo-name:
+    required: true
+    description: Repository name
+  general-tag:
+    required: true
+    description: Docker image tag
+  pat-for-nuget:
+    required: false
+    description: Personal Access Token for access in NuGet
+  runner-version:
+    required: false
+    description: GitHub runner version to be installed in a specific environment
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Build and Push a Docker Image
+      uses: docker/build-push-action@v3.1.0
+      with:
+        push: true
+        tags: |
+          ${{ inputs.registry }}/${{ inputs.github-repo-owner }}/${{ inputs.github-repo-name }}:latest
+          ${{ inputs.registry }}/${{ inputs.github-repo-owner }}/${{ inputs.github-repo-name }}:${{ inputs.general-tag }}
+        build-args: |
+          PAT_FOR_NUGET=${{ inputs.pat-for-nuget }}
+          GITHUB_REPO_OWNER=${{ inputs.github-repo-owner }}
+          RUNNER_VERSION=${{ inputs.runner-version }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
