@@ -98,7 +98,7 @@ The [**docker/build-push-action**](https://github.com/docker/build-push-action) 
 
 <br>
 
-To build images, you will need to have a **Dockerfile** configured in the main repository that will run definitely this action. So, if you have a **Called Workflow** (for example [**github-build-deploy-dotnet-workflow**](https://github.com/owner/github-build-deploy-dotnet-workflow)) that uses this action, but this workflow is beeing calling by a **Caller Workflow**, the **Dockerfile** needs to be in **Caller Workflow repository**, for example: [**BancoArbi/ms-pix**](https://github.com/owner/ms-exemplo).
+To build images, you will need to have a **Dockerfile** configured in the main repository that will run definitely this action. So, if you have a **Called Workflow** (for example [**github-build-deploy-dotnet-workflow**](https://github.com/owner/github-build-deploy-dotnet-workflow)) that uses this action, but this workflow is beeing calling by a **Caller Workflow**, the **Dockerfile** needs to be in **Caller Workflow repository**, for example: [**owner/ms-exemplo**](https://github.com/owner/ms-exemplo).
 
 <br>
 
